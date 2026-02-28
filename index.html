@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Advanced Quiz App</title>
+    <title>Big Quiz App</title>
     <style>
         body {
             font-family: Arial;
-            background: linear-gradient(to right, #4e73df, #1cc88a);
+            background: linear-gradient(to right, #1e3c72, #2a5298);
             text-align: center;
             color: white;
         }
@@ -13,11 +13,11 @@
         .quiz-box {
             background: white;
             color: black;
-            width: 400px;
-            margin: 80px auto;
+            width: 450px;
+            margin: 60px auto;
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 0 15px gray;
+            box-shadow: 0 0 20px gray;
         }
 
         h2 {
@@ -50,12 +50,11 @@
         }
     </style>
 </head>
-
 <body>
 
     <div class="quiz-box">
         <h2 id="question">Question</h2>
-        <div id="timer">Time Left: 10</div>
+        <div id="timer">Time Left: 15</div>
         <div id="answers"></div>
         <button id="nextBtn" onclick="nextQuestion()">Next</button>
         <h3 id="result"></h3>
@@ -63,30 +62,25 @@
 
     <script>
         const quiz = [
-            {
-                question: "HTML ka full form kya hai?",
-                answers: ["Hyper Text Markup Language", "High Text Machine Language", "Home Tool Markup Language"],
-                correct: 0
-            },
-            {
-                question: "CSS kis liye use hoti hai?",
-                answers: ["Design ke liye", "Database ke liye", "Server ke liye"],
-                correct: 0
-            },
-            {
-                question: "JavaScript kya karta hai?",
-                answers: ["Styling", "Programming / Logic", "Hosting"],
-                correct: 1
-            }
+            { question: "HTML ka full form kya hai?", answers: ["Hyper Text Markup Language", "High Text Machine Language", "Home Tool Markup Language"], correct: 0 },
+            { question: "CSS kis liye use hoti hai?", answers: ["Design ke liye", "Database ke liye", "Server ke liye"], correct: 0 },
+            { question: "JavaScript kya karta hai?", answers: ["Styling", "Programming / Logic", "Hosting"], correct: 1 },
+            { question: "React.js kis liye use hota hai?", answers: ["Front-end development", "Back-end development", "Database"], correct: 0 },
+            { question: "GitHub kya hai?", answers: ["Version control platform", "Programming language", "Database"], correct: 0 },
+            { question: "DOM ka full form?", answers: ["Document Object Model", "Data Object Model", "Document Online Mode"], correct: 0 },
+            { question: "Bootstrap kis liye use hoti hai?", answers: ["Responsive Design", "Server", "Database"], correct: 0 },
+            { question: "Python kis type ka language hai?", answers: ["High-level", "Assembly", "Machine"], correct: 0 },
+            { question: "Variable ka kya kaam hai?", answers: ["Data store karna", "Design karna", "Server run karna"], correct: 0 },
+            { question: "API ka full form kya hai?", answers: ["Application Programming Interface", "Application Program Internet", "Advanced Programming Interface"], correct: 0 }
         ];
 
         let currentQuestion = 0;
         let score = 0;
-        let timeLeft = 10;
+        let timeLeft = 15;
         let timer;
 
         function startTimer() {
-            timeLeft = 10;
+            timeLeft = 15;
             document.getElementById("timer").textContent = "Time Left: " + timeLeft;
 
             timer = setInterval(() => {
