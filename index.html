@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Advanced Quiz App</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #4e73df, #1cc88a);
+            text-align: center;
+            color: white;
+        }
+
+        .quiz-box {
+            background: white;
+            color: black;
+            width: 400px;
+            margin: 80px auto;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px gray;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            background: #4e73df;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2e59d9;
+        }
+
+        #nextBtn {
+            background: #1cc88a;
+        }
+
+        #timer {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="quiz-box">
+        <h2 id="question">Question</h2>
+        <div id="timer">Time Left: 10</div>
+        <div id="answers"></div>
+        <button id="nextBtn" onclick="nextQuestion()">Next</button>
+        <h3 id="result"></h3>
+    </div>
+
+    <script>
+        const quiz = [
+            {
+                question: "HTML ka full form kya hai?",
+                answers: ["Hyper Text Markup Language", "High Text Machine Language", "Home Tool Markup Language"],
+                correct: 0
+            },
+            {
+                question: "CSS kis liye use hoti hai?",
+                answers: ["Design ke liye", "Database ke liye", "Server ke liye"],
+                correct: 0
+            },
+            {
+                question: "JavaScript kya karta hai?",
+                answers: ["Styling", "Programming / Logic", "Hosting"],
+                correct: 1
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let timeLeft = 10;
+        let timer;
+
+        function startTimer() {
+            timeLeft = 10;
+            document.getElementById("timer").textContent = "Time Left: " + timeLeft;
+
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById("timer").textContent = "Time Left: " + timeLeft;
+
+                if (timeLeft === 0) {
+                    clearInterval(timer);
+                    nextQuestion();
+                }
+            }, 1000);
+        }
+
+        function loadQuestion() {
+            const questionEl = document.getElementById("question");
+            const answersEl = document.getElementById("answers");
+
+            questionEl.textContent = quiz[currentQuestion].question;
+            answersEl.innerHTML = "";
+
+            quiz[currentQuestion].answers.forEach((answer, index) => {
+                const button = document.createElement("button");
+                button.textContent = answer;
+                button.onclick = () => checkAnswer(index);
+                answersEl.appendChild(button);
+            });
+
+            startTimer();
+        }
+
+        function checkAnswer(index) {
+            if (index === quiz[currentQuestion].correct) {
+                score++;
+            }
+            clearInterval(timer);
+            nextQuestion();
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < quiz.length) {
+                loadQuestion();
+            } else {
+                document.querySelector(".quiz-box").innerHTML =
+                    "<h2>Quiz Finished!</h2>" +
+                    "<h3>Your Score: " + score + "/" + quiz.length + "</h3>" +
+                    "<button onclick='restartQuiz()'>Restart Quiz</button>";
+            }
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            loadQuestion();
+        }
+
+        loadQuestion();
+    </script>
+
+</body>
+</html>
